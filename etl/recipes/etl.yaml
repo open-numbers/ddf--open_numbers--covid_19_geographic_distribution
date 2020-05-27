@@ -1,0 +1,99 @@
+info:
+  id: ddf--open_numbers--covid_19_geographic_distribution
+  base:
+  - &source open-numbers/ddf--ecdc--covid_19_geographic_distribution
+  - &ont open-numbers/ddf--open_numbers
+  harmonization:
+  - &to_country_dp geo_id, day
+  - &to_country geo_id
+  - &to_country_name countries_and_territories
+
+config:
+    # the path to search recipe files to include
+  recipes_dir: ./
+    # the path to search dictionary files
+  dictionary_dir: ./translation_dictionaries
+    # custom procedures dir
+  procedure_dir: ../procedures
+    # external csvs
+  external_csv_dir: ../external_csvs
+
+ingredients:
+- id: datapoints
+  dataset: *source
+  key: *to_country_dp
+- id: concepts
+  dataset: *source
+  key: concept
+- id: countries
+  dataset: *source
+  key: *to_country
+- id: ont-countries
+  dataset: *ont
+  key: geo
+- id: ont-country-synonyms
+  dataset: *ont
+  key: geo, synonym
+- id: ont-concepts
+  dataset: *ont
+  key: concept
+
+cooking:
+  concepts:
+  - procedure: extract_concepts
+    ingredients:
+    - datapoints-final
+    result: concepts-extracted
+  - procedure: merge
+    ingredients:
+    - concepts-extracted
+    - ont-concepts
+    options:
+      deep: true
+    result: concepts-final
+  - procedure: serve
+    ingredients:
+    - concepts-final
+    options:
+      file_name: ddf--concepts.csv
+
+  datapoints:
+  - procedure: translate_column
+    ingredients:
+    - countries
+    options:
+      column: *to_country_name
+      target_column: country_new
+      #not_found: include
+      dictionary:
+        base: ont-country-synonyms
+        key: synonym
+        value: geo
+    result: countries-aligned
+  - procedure: translate_column
+    ingredients:
+    - datapoints
+    options:
+      column: *to_country
+      #not_found: include
+      dictionary:
+        base: countries-aligned
+        key: *to_country
+        value: country_new
+    result: datapoints-harmonized
+  - procedure: translate_header
+    ingredients:
+    - datapoints-harmonized
+    options:
+      dictionary:
+        geo_id: geo
+        day: time
+    result: datapoints-final
+  - procedure: serve
+    ingredients:
+    - datapoints-final
+
+  entities:
+  - procedure: serve
+    ingredients:
+    - ont-countries
