@@ -1,16 +1,13 @@
 {
     "name": "ddf--open_numbers--covid_19_geographic_distribution",
     "language": {
-        "name": "English",
         "id": "en"
     },
-    "title": "ECDC geographic distribution of COVID-19 cases",
-    "description": "ECDC's aggregation of world wide reported covid-19 cases, updated daily.",
-    "author": "ECDC",
-    "license": "CC-BY-4.0",
-    "created": "2020-06-03T10:08:06.007724+00:00",
-    "translations": [],
-    "version": "0.0.1",
+    "title": "ddf--open_numbers--covid_19_geographic_distribution",
+    "description": "",
+    "author": "",
+    "license": "",
+    "created": "2020-06-03T12:36:30.185667+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -100,8 +97,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time",
-            "path": "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time.csv",
+            "name": "ddf--datapoints--eight_to_fourteen_days_ago_deaths--by--geo--time",
+            "path": "ddf--datapoints--eight_to_fourteen_days_ago_deaths--by--geo--time.csv",
             "schema": {
                 "fields": [
                     {
@@ -111,7 +108,7 @@
                         "name": "time"
                     },
                     {
-                        "name": "eight_to_fourteen_days_ago_average_deaths"
+                        "name": "eight_to_fourteen_days_ago_deaths"
                     }
                 ],
                 "primaryKey": [
@@ -121,8 +118,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time",
-            "path": "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time.csv",
+            "name": "ddf--datapoints--last_seven_days_deaths--by--geo--time",
+            "path": "ddf--datapoints--last_seven_days_deaths--by--geo--time.csv",
             "schema": {
                 "fields": [
                     {
@@ -132,28 +129,7 @@
                         "name": "time"
                     },
                     {
-                        "name": "fourteen_day_rolling_average_deaths"
-                    }
-                ],
-                "primaryKey": [
-                    "geo",
-                    "time"
-                ]
-            }
-        },
-        {
-            "name": "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time",
-            "path": "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "geo"
-                    },
-                    {
-                        "name": "time"
-                    },
-                    {
-                        "name": "seven_day_rolling_average_deaths"
+                        "name": "last_seven_days_deaths"
                     }
                 ],
                 "primaryKey": [
@@ -1549,9 +1525,9 @@
                     "country",
                     "time"
                 ],
-                "value": "eight_to_fourteen_days_ago_average_deaths",
+                "value": "eight_to_fourteen_days_ago_deaths",
                 "resources": [
-                    "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time"
+                    "ddf--datapoints--eight_to_fourteen_days_ago_deaths--by--geo--time"
                 ]
             },
             {
@@ -1559,9 +1535,9 @@
                     "geo",
                     "time"
                 ],
-                "value": "eight_to_fourteen_days_ago_average_deaths",
+                "value": "eight_to_fourteen_days_ago_deaths",
                 "resources": [
-                    "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time"
+                    "ddf--datapoints--eight_to_fourteen_days_ago_deaths--by--geo--time"
                 ]
             },
             {
@@ -1569,9 +1545,9 @@
                     "country",
                     "time"
                 ],
-                "value": "fourteen_day_rolling_average_deaths",
+                "value": "last_seven_days_deaths",
                 "resources": [
-                    "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time"
+                    "ddf--datapoints--last_seven_days_deaths--by--geo--time"
                 ]
             },
             {
@@ -1579,29 +1555,9 @@
                     "geo",
                     "time"
                 ],
-                "value": "fourteen_day_rolling_average_deaths",
+                "value": "last_seven_days_deaths",
                 "resources": [
-                    "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "country",
-                    "time"
-                ],
-                "value": "seven_day_rolling_average_deaths",
-                "resources": [
-                    "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo",
-                    "time"
-                ],
-                "value": "seven_day_rolling_average_deaths",
-                "resources": [
-                    "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time"
+                    "ddf--datapoints--last_seven_days_deaths--by--geo--time"
                 ]
             },
             {
