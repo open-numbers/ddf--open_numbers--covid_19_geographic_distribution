@@ -8,7 +8,7 @@
     "description": "ECDC's aggregation of world wide reported covid-19 cases, updated daily.",
     "author": "ECDC",
     "license": "CC-BY-4.0",
-    "created": "2020-06-02T11:08:09.191019+00:00",
+    "created": "2020-06-03T00:45:16.911570+00:00",
     "translations": [],
     "version": "0.0.1",
     "resources": [
@@ -91,6 +91,90 @@
                     },
                     {
                         "name": "deaths"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time",
+            "path": "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "eight_to_fourteen_days_ago_average_deaths"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time",
+            "path": "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "fourteen_day_rolling_average_deaths"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time",
+            "path": "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "seven_day_rolling_average_deaths"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--week_growth_rate--by--geo--time",
+            "path": "ddf--datapoints--week_growth_rate--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "week_growth_rate"
                     }
                 ],
                 "primaryKey": [
@@ -1458,6 +1542,86 @@
                 "value": "deaths",
                 "resources": [
                     "ddf--datapoints--deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "eight_to_fourteen_days_ago_average_deaths",
+                "resources": [
+                    "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "eight_to_fourteen_days_ago_average_deaths",
+                "resources": [
+                    "ddf--datapoints--eight_to_fourteen_days_ago_average_deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "fourteen_day_rolling_average_deaths",
+                "resources": [
+                    "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "fourteen_day_rolling_average_deaths",
+                "resources": [
+                    "ddf--datapoints--fourteen_day_rolling_average_deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "seven_day_rolling_average_deaths",
+                "resources": [
+                    "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "seven_day_rolling_average_deaths",
+                "resources": [
+                    "ddf--datapoints--seven_day_rolling_average_deaths--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "week_growth_rate",
+                "resources": [
+                    "ddf--datapoints--week_growth_rate--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "week_growth_rate",
+                "resources": [
+                    "ddf--datapoints--week_growth_rate--by--geo--time"
                 ]
             }
         ],

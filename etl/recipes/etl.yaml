@@ -88,7 +88,74 @@ cooking:
       dictionary:
         geo_id: geo
         day: time
+    result: datapoints-translated
+
+  - procedure: window
+    ingredients:
+        - datapoints-translated
+    options:
+        window:
+            size: 7
+            column: time
+        aggregate:
+            deaths: mean
+    result: datapoints-window
+  - procedure: translate_header
+    ingredients:
+    - datapoints-window
+    options:
+      dictionary:
+        deaths: seven_day_rolling_average_deaths
+    result: datapoints-window-translated
+
+
+  - procedure: window
+    ingredients:
+        - datapoints-translated
+    options:
+        window:
+            size: 14
+            column: time
+        aggregate:
+            deaths: mean
+    result: datapoints-window_2weeks
+  - procedure: translate_header
+    ingredients:
+    - datapoints-window_2weeks
+    options:
+      dictionary:
+        deaths: fourteen_day_rolling_average_deaths
+    result: datapoints-window_2weeks-translated
+
+  - procedure: merge
+    ingredients:
+    - datapoints-translated
+    - datapoints-window-translated
+    - datapoints-window_2weeks-translated
+    options:
+      deep: true
+    result: datapoints-merged
+    
+
+  - procedure: run_op
+    ingredients:
+      - datapoints-merged
+    result: datapoints-rate
+    options:
+      op:
+        # day 8-14 rolling average is (fourteen_day_rolling_average_deaths * 2 - seven_day_rolling_average_deaths)
+        eight_to_fourteen_days_ago_average_deaths: (fourteen_day_rolling_average_deaths * 2 - seven_day_rolling_average_deaths)
+        week_growth_rate: "seven_day_rolling_average_deaths / eight_to_fourteen_days_ago_average_deaths"
+
+  - procedure: filter
+    ingredients:
+      - datapoints-rate
     result: datapoints-final
+    options:      
+      row:  # just as `filter` in ingredient definition
+        week_growth_rate:
+            $ne: Infinity
+
   - procedure: serve
     ingredients:
     - datapoints-final
