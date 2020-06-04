@@ -14,7 +14,7 @@ config:
     # the path to search dictionary files
   dictionary_dir: ./translation_dictionaries
     # custom procedures dir
-  procedure_dir: ../procedures
+  procedure_dir: ./procedures
     # external csvs
   external_csv_dir: ../external_csvs
 
@@ -90,13 +90,14 @@ cooking:
         day: time
     result: datapoints-translated
 
-  - procedure: window
+  - procedure: custom_window.window
     ingredients:
         - datapoints-translated
     options:
         window:
-            size: 7
+            size: 7d
             column: time
+            column_is_time: true
         aggregate:
             deaths: sum
     result: datapoints-window
@@ -109,13 +110,14 @@ cooking:
     result: datapoints-window-translated
 
 
-  - procedure: window
+  - procedure: custom_window.window
     ingredients:
         - datapoints-translated
     options:
         window:
-            size: 14
+            size: 14d
             column: time
+            column_is_time: true
         aggregate:
             deaths: sum
     result: datapoints-window_2weeks
