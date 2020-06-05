@@ -99,30 +99,31 @@ def window(chef: Chef, ingredients: List[DataPointIngredient], result, **options
     newdata = dict()
 
     ddf_time_formats = {
-      'second': '%Y%m%dt%H%M%S',
-      'minute': '%Y%m%dt%H%M',
-      'hour': '%Y%m%dt%H',
-      'day': '%Y%m%d',
-      'month': '%Y-%m',
-      'year': '%Y'
+        'second': '%Y%m%dt%H%M%S',
+        'minute': '%Y%m%dt%H%M',
+        'hour': '%Y%m%dt%H',
+        'day': '%Y%m%d',
+        'month': '%Y-%m',
+        'year': '%Y'
     }
+    def _get_time_format(df, column):
+        if column=='time':
+            return _find_time_format(df[column].iloc[0], ddf_time_formats)
+        else:
+            return ddf_time_formats[column]
 
-    def find_format(datestr, formats):
-      for format in formats.values():
-        try:
-          pd.to_datetime(datestr, format=format)
-          return format
-        except:
-          continue 
-      assert False, f"Invalid time format passed: {datestr}"
+    def _find_time_format(datestr, formats):
+        for format in formats.values():
+            try:
+                pd.to_datetime(datestr, format=format)
+                return format
+            except:
+                continue 
+        assert False, f"Invalid time format passed: {datestr}"
 
-    time_format = ''
     if column_is_time:
-      first_key = list(data.keys())[0]
-      if column=='time':
-        time_format = find_format(data[first_key][column].iloc[0], ddf_time_formats)
-      else:
-        time_format = ddf_time_formats[column]
+        first_key = list(data.keys())[0]
+        time_format = _get_time_format(data[first_key], column)
 
     for k, func in aggregate.items():
         f = mkfunc(func)
@@ -158,7 +159,7 @@ def window(chef: Chef, ingredients: List[DataPointIngredient], result, **options
                           .agg({k: f}).reset_index(ingredient.key).dropna())
 
         
-        if column_is_time != None:
+        if column_is_time:
           newdata[k][column] = newdata[k][column].dt.strftime(time_format).astype(int)
 
     return DataPointIngredient.from_procedure_result(result, ingredient.key, newdata)

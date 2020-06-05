@@ -10,10 +10,7 @@ from ddf_utils.chef.helpers import debuggable, read_opt, mkfunc
 from ddf_utils.chef.model.ingredient import DataPointIngredient
 from ddf_utils.chef.model.chef import Chef
 
-
 logger = logging.getLogger('reindex')
-
-
 
 ddf_time_formats = {
   'second': '%Y%m%dt%H%M%S',
@@ -57,40 +54,42 @@ def by_date(chef: Chef, ingredients: List[DataPointIngredient], result, column, 
         # groups before rolling. Just group all key column except the column to aggregate.
         keys = ingredient.key.copy()
 
+        # parse time column
         try:
             df[column] = pd.to_datetime(df[column], format=time_format)
         except:
             print(f'Could not parse {column} to format: {time_format}')
             raise
 
-
         # then remove the rolling column from primary keys, group by remaining keys
         keys.remove(column)
+        if range == 'global':
+          start = df[column].min()
+          end = df[column].max()
 
         def reindex(re_df):
           # reindex
           if range == 'local':
             reindexed = re_df.set_index(column).asfreq(freq=freq).reset_index()
           elif range == 'global':
-            date_range = pd.date_range(start=df[column].min(), end=df[column].max(), freq=freq, name=column)
+            date_range = pd.date_range(start=start, end=end, freq=freq, name=column)
             reindexed = re_df.set_index(column).reindex(date_range).reset_index()
           else:
             assert False , f'Given range ({range}) is invalid, must be either \'local\' or \'global\''
 
           # fill newly added keys
-          for k in keys:
-            reindexed[k] = reindexed[k].fillna(value=re_df.iloc[0][k])
+          for key in keys:
+            reindexed[key] = reindexed[key].fillna(value=re_df.iloc[0][key])
 
-          # fill newly added indicators  
-          values = list(set(re_df.columns) - set(ingredient.key))
-          reindexed[values] = reindexed[values].fillna(0)
+          # fill newly added indicator
+          reindexed[k] = reindexed[k].fillna(fill_value)
           return reindexed
 
         # reindex per other-keys
         newdata[k] = (df.groupby(by=keys, sort=False, group_keys=False)
                         .apply(reindex))
       
-        # back to original dtype, ints for time
+        # back to original dtype, i.e. ints for time
         newdata[k][column] = newdata[k][column].dt.strftime(time_format).astype(int)
 
     return DataPointIngredient.from_procedure_result(result, ingredient.key, newdata)
