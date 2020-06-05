@@ -90,12 +90,32 @@ cooking:
         day: time
     result: datapoints-translated
 
-  - procedure: custom_window.window
+  - procedure: replace.by_query
     ingredients:
-        - datapoints-translated
+    - datapoints-translated
+    options:
+      rows:
+        deaths:
+          $lt: 0
+      columns: deaths
+      value: 0
+    result: datapoints-positive
+
+  - procedure: reindex.by_date
+    ingredients: 
+    - datapoints-positive
+    options:
+      column: time
+      freq: D
+      fill_value: 0
+    result: datapoints-gapfilled
+
+  - procedure: window
+    ingredients:
+        - datapoints-gapfilled
     options:
         window:
-            size: 7d
+            size: 7
             column: time
             column_is_time: true
         aggregate:
@@ -112,7 +132,7 @@ cooking:
 
   - procedure: custom_window.window
     ingredients:
-        - datapoints-translated
+        - datapoints-gapfilled
     options:
         window:
             size: 14d
@@ -131,7 +151,7 @@ cooking:
 
   - procedure: merge
     ingredients:
-    - datapoints-translated
+    - datapoints-gapfilled
     - datapoints-window-translated
     - datapoints-window_2weeks-translated
     options:
