@@ -41,18 +41,21 @@ def by_date(chef: Chef, ingredients: List[DataPointIngredient], result, column, 
     assert len(ingredients) == 1, "procedure only support 1 ingredient for now."
     # ingredient = chef.dag.get_node(ingredients[0]).evaluate()
     ingredient = ingredients[0]
+    
     logger.info('reindex.by_date: ' + ingredient.id)
 
     data = ingredient.compute()
     newdata = dict()
 
-    first_key = list(data.keys())[0]
+    # keys for grouping. in multidimensional data like datapoints, we want create
+    # groups before reindexing. Just group all key column except the column to reindex over.
+    keys = ingredient.key.copy()
+    keys.remove(column)
+
+    first_key = next(iter(data))
     time_format = _get_time_format(data[first_key], column)
 
     for k, df in data.items():
-        # keys for grouping. in multidimensional data like datapoints, we want create
-        # groups before rolling. Just group all key column except the column to aggregate.
-        keys = ingredient.key.copy()
 
         # parse time column
         try:
@@ -61,8 +64,6 @@ def by_date(chef: Chef, ingredients: List[DataPointIngredient], result, column, 
             print(f'Could not parse {column} to format: {time_format}')
             raise
 
-        # then remove the rolling column from primary keys, group by remaining keys
-        keys.remove(column)
         if range == 'global':
           start = df[column].min()
           end = df[column].max()

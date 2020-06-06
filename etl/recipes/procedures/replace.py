@@ -18,17 +18,14 @@ def by_query(chef: Chef, ingredients: List[Ingredient], result, **options) -> In
     ingredient = ingredients[0]
     logger.info('replace.by_query: ' + ingredient.id)
 
-    data = ingredient.compute()
+    data = ingredient.get_data()
     newdata = dict()
+    keys = ingredient.key
 
     row_filters = read_opt(options, 'rows', False, None)
     columns = read_opt(options, 'columns', False, None)
     columns = [columns] if isinstance(columns, str) else columns
     value = read_opt(options, 'value', False, None)
-
-    newdata = dict()
-    data = ingredient.get_data()
-    keys = ingredient.key
 
     for k, df in data.items():
         if k in columns:
