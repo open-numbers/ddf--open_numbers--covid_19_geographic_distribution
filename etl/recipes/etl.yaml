@@ -16,7 +16,7 @@ config:
     # custom procedures dir
   procedure_dir: ./procedures
     # external csvs
-  external_csv_dir: ../external_csvs
+  external_csv_dir: ./external_csvs
 
 ingredients:
 - id: datapoints
@@ -38,6 +38,10 @@ ingredients:
   dataset: *ont
   key: concept
 
+- id: concept_patch
+  key: concept
+  data: concepts.csv
+
 cooking:
   concepts:
   - procedure: extract_concepts
@@ -48,6 +52,7 @@ cooking:
     ingredients:
     - concepts-extracted
     - ont-concepts
+    - concept_patch
     options:
       deep: true
     result: concepts-final
