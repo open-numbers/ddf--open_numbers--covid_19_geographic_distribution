@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2020-06-10T20:07:50.542358+00:00",
+    "created": "2020-06-10T20:34:24.272066+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -37,6 +37,12 @@
                     },
                     {
                         "name": "name"
+                    },
+                    {
+                        "name": "name_catalog"
+                    },
+                    {
+                        "name": "name_short"
                     },
                     {
                         "name": "scales"
@@ -560,6 +566,24 @@
                     "concept"
                 ],
                 "value": "name",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name_catalog",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name_short",
                 "resources": [
                     "ddf--concepts"
                 ]
