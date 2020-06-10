@@ -1,2 +1,2 @@
-concept,color
-week_growth_rate,"{""palette"": { ""0"": ""#80ffd3"",""0.4"": ""#6DC55B"",""0.7"": ""#74CF4A"",""0.9"": ""#92D955"",""0.95"": ""#EEAC3C"",""1.1"": ""#EEAC3C"",""1.5"": ""#E47449"",""3"": ""#E4622B"",""4.5"": ""#CB493B"",""5"": ""#BD2A23""}}"
+concept,color,description,name,name_short,name_catalog
+week_growth_rate,"{""palette"": { ""0"": ""#80ffd3"",""0.4"": ""#6DC55B"",""0.7"": ""#74CF4A"",""0.9"": ""#92D955"",""0.95"": ""#EEAC3C"",""1.1"": ""#EEAC3C"",""1.5"": ""#E47449"",""3"": ""#E4622B"",""4.5"": ""#CB493B"",""5"": ""#BD2A23""}}","Calculation is based on ECDC deaths reported during last 7 days. We have removed the sudden spikes casued by death reports and we have summed the deaths per week to get rid of the daily fluctuations caused by reporting cycles that verry from country to country and week by week.","The multiplier (week over week growth rate of deaths)","The multiplier","Multiplier (weekly growth rate)"
