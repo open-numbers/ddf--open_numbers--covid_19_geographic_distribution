@@ -2,6 +2,7 @@ concept,color,concept_type,description,domain,drill_up,indicator_url,name,name_c
 cases,,measure,,,,,Cases,,,,,,
 color,,string,,,,,Color,,,,,_none,
 country,,entity_set,,geo,"[""world_6region"", ""income_groups"", ""landlocked"", ""g77_and_oecd_countries"", ""main_religion_2008"", ""world_4region"", ""unicef_region""]",https://github.com/open-numbers/ddf--gapminder--dim_geo_countries_and_groups/blob/master/ddf--list--geo--country.csv,Country,,,,,categorizations,
+cumulative_number_for_14_days_of_covid_19_cases_per_100000,,measure,,,,,Cumulative Number For 14 Days Of Covid 19 Cases Per 100000,,,,,,
 deaths,,measure,,,,,Deaths,,,,,,
 description,,string,,,,,Description,,,,,_none,
 domain,,string,,,,,Domain,,,,,_none,
