@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2020-09-21T00:07:48.827176+00:00",
+    "created": "2020-09-21T03:07:52.020622+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -73,6 +73,27 @@
                     },
                     {
                         "name": "cases"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--cumulative_number_for_14_days_of_covid_19_cases_per_100000--by--geo--time",
+            "path": "ddf--datapoints--cumulative_number_for_14_days_of_covid_19_cases_per_100000--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "cumulative_number_for_14_days_of_covid_19_cases_per_100000"
                     }
                 ],
                 "primaryKey": [
@@ -1669,6 +1690,26 @@
                 "value": "cases",
                 "resources": [
                     "ddf--datapoints--cases--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "cumulative_number_for_14_days_of_covid_19_cases_per_100000",
+                "resources": [
+                    "ddf--datapoints--cumulative_number_for_14_days_of_covid_19_cases_per_100000--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "cumulative_number_for_14_days_of_covid_19_cases_per_100000",
+                "resources": [
+                    "ddf--datapoints--cumulative_number_for_14_days_of_covid_19_cases_per_100000--by--geo--time"
                 ]
             },
             {
