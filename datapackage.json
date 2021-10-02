@@ -7,7 +7,17 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-08-23T03:00:44.617561+00:00",
+    "base": [
+        "open-numbers/ddf--ecdc--covid_19_geographic_distribution",
+        "open-numbers/ddf--open_numbers"
+    ],
+    "harmonization": [
+        "geo_id, day",
+        "geo_id",
+        "countries_and_territories"
+    ],
+    "id": "ddf--open_numbers--covid_19_geographic_distribution",
+    "created": "2021-10-02T07:12:57.925488+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
