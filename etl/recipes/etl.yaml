@@ -107,7 +107,7 @@ cooking:
     result: datapoints-positive
 
   - procedure: reindex.by_date
-    ingredients: 
+    ingredients:
     - datapoints-positive
     options:
       column: time
@@ -162,7 +162,7 @@ cooking:
     options:
       deep: true
     result: datapoints-merged
-    
+
 
   - procedure: run_op
     ingredients:
@@ -177,12 +177,12 @@ cooking:
     ingredients:
       - datapoints-rate
     result: datapoints-final
-    options:      
+    options:
       row:  # just as `filter` in ingredient definition
         week_growth_rate:
-          $ne: Infinity
+          $ne: +.inf
       item:
-        $nin: 
+        $nin:
           - 'last_fourteen_days_deaths'
 
   - procedure: serve
