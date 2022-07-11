@@ -11,13 +11,13 @@
         "open-numbers/ddf--ecdc--covid_19_geographic_distribution",
         "open-numbers/ddf--open_numbers"
     ],
+    "created": "2022-07-11T06:56:36.653596+00:00",
     "harmonization": [
         "geo_id, day",
         "geo_id",
         "countries_and_territories"
     ],
     "id": "ddf--open_numbers--covid_19_geographic_distribution",
-    "created": "2021-10-02T07:12:57.925488+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -262,6 +262,9 @@
                         "name": "unicode_region_subtag"
                     },
                     {
+                        "name": "west_and_rest"
+                    },
+                    {
                         "name": "world_4region"
                     },
                     {
@@ -479,6 +482,24 @@
                     }
                 ],
                 "primaryKey": "unicef_region"
+            }
+        },
+        {
+            "name": "ddf--entities--geo--west_and_rest",
+            "path": "ddf--entities--geo--west_and_rest.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "west_and_rest"
+                    },
+                    {
+                        "name": "is--west_and_rest"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "west_and_rest"
             }
         },
         {
@@ -1043,6 +1064,24 @@
                 "primaryKey": [
                     "geo"
                 ],
+                "value": "is--west_and_rest",
+                "resources": [
+                    "ddf--entities--geo--west_and_rest"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "west_and_rest"
+                ],
+                "value": "is--west_and_rest",
+                "resources": [
+                    "ddf--entities--geo--west_and_rest"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
                 "value": "is--world_4region",
                 "resources": [
                     "ddf--entities--geo--world_4region"
@@ -1302,6 +1341,7 @@
                     "ddf--entities--geo--un_sdg_region",
                     "ddf--entities--geo--unhcr_region",
                     "ddf--entities--geo--unicef_region",
+                    "ddf--entities--geo--west_and_rest",
                     "ddf--entities--geo--world_4region",
                     "ddf--entities--geo--world_6region"
                 ]
@@ -1387,6 +1427,15 @@
                 "value": "name",
                 "resources": [
                     "ddf--entities--geo--unicef_region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "west_and_rest"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--geo--west_and_rest"
                 ]
             },
             {
@@ -1707,6 +1756,24 @@
                 "value": "unicode_region_subtag",
                 "resources": [
                     "ddf--entities--geo--global"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "west_and_rest",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "west_and_rest",
+                "resources": [
+                    "ddf--entities--geo--country"
                 ]
             },
             {
